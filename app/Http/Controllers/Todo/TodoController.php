@@ -19,7 +19,7 @@ class TodoController extends Controller
         // Фильтрация по наличию статуса
         $tasks = Todo::when($request->input('status'), function ($query) use ($request) {
             return $query->where('status', $request->input('status'));
-        })->paginate(5);
+        })->orderBy('id', 'asc')->paginate(5);
 
         //Добавляем параметры страницы для пагинации отфильтрованных данных
         $tasks->appends($request->except('page'));
